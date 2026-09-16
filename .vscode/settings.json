@@ -1,0 +1,23 @@
+{
+    // 钉住集成终端为 Windows PowerShell（这台机器没有 PowerShell 7）
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+    // 让 Code Runner 在“终端”里跑程序，而不是只读的“输出”面板。
+    // 这样 cin / scanf 能直接在终端里打字输入。
+    "code-runner.runInTerminal": true,
+
+    // 运行后把焦点交给终端，不用再手动点一下才能输入
+    "code-runner.preserveFocus": false,
+
+    // 每次运行前自动保存，避免编译的还是旧代码
+    "code-runner.saveFileBeforeRun": true,
+
+    // 关于占位符（来自 Code Runner 0.12.2 源码）：
+    //   $dir / $dirWithoutTrailingSlash 本身自带双引号  -> cd $dir 不要再套引号
+    //   $fileName / $fileNameWithoutExt 不带引号        -> 文件名必须自己加引号，
+    //     否则 Ex3(answer).cpp 这类圆括号会被 PowerShell 解析坏。
+    // 另：PowerShell 5.1 不支持 &&，这里用 ; 和 if ($?) 代替。
+    "code-runner.executorMap": {
+        "cpp": "cd $dir; g++ -g -fdiagnostics-color=always \"$fileName\" -o \"$fileNameWithoutExt\"; if ($?) { & \".\\$fileNameWithoutExt\" }"
+    }
+}
