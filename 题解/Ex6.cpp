@@ -22,7 +22,7 @@ public:
                 i++;
             }
             else{
-                i--
+                i--;
             }
         }
         string res;
